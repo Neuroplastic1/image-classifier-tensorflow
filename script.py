@@ -25,3 +25,20 @@ def load_and_prep_image(image_path, img_shape=224):
     # Rescale the image (get all values between 0 and 1)
     img = img/255.
     return img
+
+# Define the function to make prediction and return human-readable labels
+def predict_and_label(model, image_path, class_names):
+    """
+    Imports an image located at image_path, makes a prediction with model
+    and labels the image based on the highest probability prediction class.
+    """
+    # Load and prep the image
+    img = load_and_prep_image(image_path)
+    
+    # Make a prediction
+    pred = model.predict(tf.expand_dims(img, axis=0))
+    
+    # Get the predicted class
+    pred_class = class_names[int(tf.round(pred))]
+    
+    return pred_class
