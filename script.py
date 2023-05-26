@@ -42,3 +42,13 @@ def predict_and_label(model, image_path, class_names):
     pred_class = class_names[int(tf.round(pred))]
     
     return pred_class
+
+# Load class names for ImageNet
+labels_path = tf.keras.utils.get_file('ImageNetLabels.txt','https://storage.googleapis.com/download.tensorflow.org/data/ImageNetLabels.txt')
+imagenet_labels = np.array(open(labels_path).read().splitlines())
+
+# Make a prediction
+image_path = 'path_to_your_image.jpg'
+prediction = predict_and_label(model, image_path, imagenet_labels)
+print(prediction)
+
